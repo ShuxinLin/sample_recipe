@@ -1,0 +1,15 @@
+name: multistep_example
+entry_points:
+    sample_function_1:
+        parameters:
+            data_path: string
+            storage_path: string
+        command: "python steps/sample_function_1.py --data_path {data_path} --storage_path {storage_path}"
+
+    sample_function_2:
+        parameters:
+            processed_data_path: string
+            feature_columns: string
+            target_columns: string
+            log_model: string
+        command: "python steps/sample_function_2.py --processed_data_path {processed_data_path} --feature_columns {feature_columns} --target_columns {target_columns} --log_model {log_model}"

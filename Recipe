@@ -1,0 +1,20 @@
+recipe : {{ recipe_name }}
+job_id: {{ job_id }}
+backend: {{ backend|default("local", true) }}
+
+workflow:
+  - sample_function_1:
+      name: sample_function_1
+      description: sample function 1
+      parameters:
+        - data_path: {{ data_path }}
+        - storage_path: "file://./storage"
+
+  - sample_function_2:
+      name: sample_function_2
+      description: sample function 2
+      parameters:
+        - processed_data_path: "[[sample_function_1]]"
+        - feature_columns: {{ feature_columns }}
+        - target_columns: {{ target_columns }}
+        - log_model: True
