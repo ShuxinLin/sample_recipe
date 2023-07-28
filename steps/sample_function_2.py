@@ -32,6 +32,7 @@ from model_factory.core.data_access_object.data import read_csv, write_csv
 def sample_function_2(processed_data_path, feature_columns, target_columns, log_model):
     mlflow.set_tag("recipe", "sample-recipe")
     mlflow.set_tag("step", inspect.stack()[0][3])
+    mlflow.set_tag("summary", "true")
 
     df = read_csv(processed_data_path)
     features = feature_columns.split(",")
@@ -47,6 +48,10 @@ def sample_function_2(processed_data_path, feature_columns, target_columns, log_
     if log_model == 'True':
         print("log the lr model...")
         mlflow.sklearn.log_model(lr, "lr_model")
+
+    summary_dict = dict()
+    summary_dict["score"] = score
+    mlflow.log_dict(summary_dict, "summary.json")
 
 
 if __name__ == "__main__":
